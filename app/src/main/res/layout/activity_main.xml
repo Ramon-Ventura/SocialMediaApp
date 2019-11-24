@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:id="@+id/imgLogo"
+        android:id="@+id/imageViewLogo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,20 +19,20 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnRegister"
+        android:id="@+id/buttonRegister"
         android:text="Register"
         style="@style/Widget.AppCompat.Button.Colored"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
         android:layout_margin="20dp"
         />
     <!--Login Button-->
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnLogin"
+        android:id="@+id/buttonLogin"
         android:text="Login"
         style="@style/Widget.AppCompat.Button.Colored"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister"
         android:layout_margin="20dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
