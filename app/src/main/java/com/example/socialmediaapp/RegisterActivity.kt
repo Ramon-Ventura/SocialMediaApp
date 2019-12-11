@@ -64,6 +64,7 @@ class RegisterActivity : AppCompatActivity() {
         //Have account TextView Listener
         tvHaveAccount.setOnClickListener {
             startActivity( Intent(this,LoginActivity::class.java))
+            finish()
         }
     }
 

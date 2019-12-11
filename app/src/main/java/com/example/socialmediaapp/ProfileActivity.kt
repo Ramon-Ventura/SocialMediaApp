@@ -38,6 +38,10 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 
     override fun onStart() {
         //check on start of app
@@ -45,11 +49,13 @@ class ProfileActivity : AppCompatActivity() {
         super.onStart()
     }
 
+    //Inflate the menu with the options
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         return super.onCreateOptionsMenu(menu)
     }
 
+    //Handling users sign out
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         //get item id
         val id : Int = item!!.itemId
