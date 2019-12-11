@@ -13,15 +13,14 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
-
-class RegisterActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     //Defining widgets
     private lateinit var etEmail : EditText
     private lateinit var etPassword : EditText
-    private lateinit var btnRegister : Button
-    private lateinit var tvHaveAccount : TextView
+    private lateinit var btnLogin : Button
+    private lateinit var tvNotHaveAccount : TextView
 
-    //Firebase variable
+    //Defining firebase
     private lateinit var auth: FirebaseAuth
 
     //Progress Dialog
@@ -29,60 +28,61 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
-        //Init
-        etEmail = findViewById(R.id.editTextEmail)
-        etPassword = findViewById(R.id.editTextPassword)
-        btnRegister = findViewById(R.id.buttonLogin)
-        tvHaveAccount = findViewById(R.id.textViewNotHaveAccount)
-        auth = FirebaseAuth.getInstance()
-        progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Registering...")
+        setContentView(R.layout.activity_login)
 
         //Action Bar and its title
         supportActionBar?.title = "Create Account"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        //Register Listener
-        btnRegister.setOnClickListener {
+        //Init
+        etEmail = findViewById(R.id.editTextEmail)
+        etPassword = findViewById(R.id.editTextPassword)
+        btnLogin = findViewById(R.id.buttonLogin)
+        tvNotHaveAccount = findViewById(R.id.textViewNotHaveAccount)
+
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
+        //Set progressDialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Logging In...")
+
+        //Button login listener
+        btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
             //validate
             if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                //invalid email
                 etEmail.error = "Invalid Email"
                 etEmail.isFocusable = true
-            }else if (etPassword.length() < 6) {
-                etPassword.error = "Short Password"
-                etPassword.isFocusable = true
             }else{
-                registerUser(email,password)
+                //valid email
+                loginUser(email,password)
             }
         }
-        //Have account TextView Listener
-        tvHaveAccount.setOnClickListener {
-            startActivity( Intent(this,LoginActivity::class.java))
+        //Not have account textView listener
+        tvNotHaveAccount.setOnClickListener {
+            startActivity( Intent(this,RegisterActivity::class.java))
         }
     }
 
-    //Register user to firebase collection
-    private fun registerUser(email: String, password: String) {
+    private fun loginUser(email: String, password: String) {
         progressDialog.show()
-        auth.createUserWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, dismiss dialog and start profile activity
+                    //dismiss progressDialog
                     progressDialog.dismiss()
+                    // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    if (user != null) {
-                        Toast.makeText(this,"Registered \n"+user.email, Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this,ProfileActivity::class.java))
-                        finish()
-                    }
+                    startActivity( Intent(this,ProfileActivity::class.java))
+                    finish()
                 } else {
                     // If sign in fails, display a message to the user.
+                    //dismiss progressDialog
                     progressDialog.dismiss()
                     Toast.makeText(this, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
@@ -90,7 +90,9 @@ class RegisterActivity : AppCompatActivity() {
 
                 // ...
             }
+
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

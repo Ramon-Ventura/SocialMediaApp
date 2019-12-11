@@ -23,5 +23,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
         }
+        //Start login activity
+        btnLogin.setOnClickListener {
+            startActivity( Intent (this,LoginActivity::class.java))
+        }
     }
 }
