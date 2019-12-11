@@ -19,6 +19,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
@@ -211,6 +213,25 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
+                    //get user email and uid from auth
+                    val hEmail : String? = user?.email
+                    val uid = user?.uid
+
+                    val hashMap = HashMap<Any,String?>()
+                    hashMap["email"] = hEmail
+                    hashMap["uid"] = uid
+                    hashMap["name"] = ""
+                    hashMap["phone"] = ""
+                    hashMap["image"] = ""
+                    //Firebase database instance
+                    val dataBase = FirebaseDatabase.getInstance()
+                    //path to store userdata
+                    val reference : DatabaseReference = dataBase.getReference("Users")
+
+                    if (uid != null) {
+                        reference.child(uid).setValue(hashMap)
+                    }
+
                     //show user email in toast
                     Toast.makeText(this,""+user!!.email,Toast.LENGTH_SHORT).show()
                     //Go to profile

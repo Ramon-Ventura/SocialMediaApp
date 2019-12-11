@@ -12,6 +12,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -77,6 +79,25 @@ class RegisterActivity : AppCompatActivity() {
                     // Sign in success, dismiss dialog and start profile activity
                     progressDialog.dismiss()
                     val user = auth.currentUser
+                    //get user email and uid from auth
+                    val hEmail : String? = user?.email
+                    val uid = user?.uid
+
+                    val hashMap = HashMap<Any,String?>()
+                    hashMap["email"] = hEmail
+                    hashMap["uid"] = uid
+                    hashMap["name"] = ""
+                    hashMap["phone"] = ""
+                    hashMap["image"] = ""
+                    //Firebase database instance
+                    val dataBase = FirebaseDatabase.getInstance()
+                    //path to store userdata
+                    val reference : DatabaseReference = dataBase.getReference("Users")
+
+                    if (uid != null) {
+                        reference.child(uid).setValue(hashMap)
+                    }
+
                     if (user != null) {
                         Toast.makeText(this,"Registered \n"+user.email, Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this,ProfileActivity::class.java))
