@@ -16,12 +16,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
     companion object{
@@ -167,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
                     progressDialog.dismiss()
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    startActivity( Intent(this,ProfileActivity::class.java))
+                    startActivity( Intent(this,DashboardActivity::class.java))
                     finish()
                 } else {
                     // If sign in fails, display a message to the user.
@@ -235,7 +233,7 @@ class LoginActivity : AppCompatActivity() {
                     //show user email in toast
                     Toast.makeText(this,""+user!!.email,Toast.LENGTH_SHORT).show()
                     //Go to profile
-                    startActivity( Intent(this,ProfileActivity::class.java))
+                    startActivity( Intent(this,DashboardActivity::class.java))
                     finish()
                     //updateUI(user)
                 } else {

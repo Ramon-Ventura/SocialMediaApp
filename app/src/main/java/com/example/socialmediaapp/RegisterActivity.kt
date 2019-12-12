@@ -100,7 +100,7 @@ class RegisterActivity : AppCompatActivity() {
 
                     if (user != null) {
                         Toast.makeText(this,"Registered \n"+user.email, Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this,ProfileActivity::class.java))
+                        startActivity(Intent(this,DashboardActivity::class.java))
                         finish()
                     }
                 } else {
