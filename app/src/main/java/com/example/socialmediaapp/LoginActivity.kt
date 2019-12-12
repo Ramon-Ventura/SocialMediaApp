@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         //Action Bar and its title
-        supportActionBar?.title = "Create Account"
+        supportActionBar?.title = "Logging Account"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
