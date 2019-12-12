@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F1EDED"
     tools:context=".ProfileFragment">
 
@@ -13,11 +14,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/imageViewCover"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:scaleType="fitXY"
                 android:background="@color/colorPrimaryDark">
-            </RelativeLayout>
+            </ImageView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
@@ -30,11 +33,12 @@
                     android:layout_marginStart="20dp"
                     android:padding="5dp"
                     android:background="@color/colorPrimary"
-                    android:src="@drawable/ic_add_image" />
+                    android:src="@drawable/ic_face_white" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="#77000000">
                     <TextView
                         android:id="@+id/textViewName"
                         android:layout_width="match_parent"
@@ -62,12 +66,12 @@
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="PROFILE FRAGMENT" />
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:src="@drawable/ic_edit_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

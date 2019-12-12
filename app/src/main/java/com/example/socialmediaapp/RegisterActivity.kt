@@ -89,6 +89,8 @@ class RegisterActivity : AppCompatActivity() {
                     hashMap["name"] = ""
                     hashMap["phone"] = ""
                     hashMap["image"] = ""
+                    hashMap["cover"] = ""
+
                     //Firebase database instance
                     val dataBase = FirebaseDatabase.getInstance()
                     //path to store userdata
